@@ -4,10 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e8e11af-2f5b-45f8-b952-5fea85ba30b3" name="Changes" comment="">
+    <list default="true" id="5e8e11af-2f5b-45f8-b952-5fea85ba30b3" name="Changes" comment="Update maven">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/WeatherDataConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/WeatherDataConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Writers/JsonToParquetWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Writers/JsonToParquetWriter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/WeatherDataConsumer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/WeatherDataConsumer$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/WeatherDataConsumer$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/WeatherDataConsumer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/WeatherDataConsumer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Writers/JsonToParquetWriter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Writers/JsonToParquetWriter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/processors/RainingTrigger$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/processors/RainingTrigger$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/processors/RainingTrigger.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/processors/RainingTrigger.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/example/AppTest.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,20 +45,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/home/hadoop/producer_consumer/producer_consumer_example/producer_consumer",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/hadoop/ProjectDataIntensive/Consumer/central-station/src&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
     </key>
@@ -123,8 +136,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.WeatherDataConsumer" />
-        <item itemvalue="Application.App" />
         <item itemvalue="Application.JsonToParquetWriter" />
+        <item itemvalue="Application.App" />
         <item itemvalue="Application.RainingTrigger" />
       </list>
     </recent_temporary>
@@ -143,10 +156,17 @@
       <workItem from="1682967532557" duration="676000" />
       <workItem from="1683008364975" duration="101000" />
       <workItem from="1683008480484" duration="11480000" />
+      <workItem from="1683119566758" duration="1069000" />
+      <workItem from="1683120647641" duration="5792000" />
+      <workItem from="1683183795371" duration="2166000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Update maven" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update maven" />
   </component>
 </project>

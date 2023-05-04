@@ -33,14 +33,13 @@ public class WeatherDataConsumer {
                 .appName("ReadJsonArrayToDataFrame")
                 .master("local[*]")  // Set the master URL for the local mode
                 .getOrCreate();
-        int batchSize=20;
+        int batchSize=10000;
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
         consumer.subscribe(Collections.singletonList("weather_data"));
         int counter=0;
-
+        HashMap<Integer,StringBuilder>stationsData=new HashMap<>();
         while (true) {
             ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
-            HashMap<Integer,StringBuilder>stationsData=new HashMap<>();
             for (ConsumerRecord<String, String> record : records) {
                 System.out.println("Received message: " + record.value());
                 int stationID=Integer.parseInt(record.value().split(",")[0].split(":")[1]);
@@ -53,12 +52,8 @@ public class WeatherDataConsumer {
                 counter++;
                 System.out.println("counter === "+counter);
                 if(counter>=batchSize){
-                    new Thread(new Runnable(){
-                        @Override
-                        public void run() {
-                            writeDataInParquetFiles(deepCopy(stationsData),spark);
-                        }
-                    }).start();
+                    writeDataInParquetFiles(deepCopy(stationsData),spark);
+                    stationsData.clear();
                     counter=0;
                 }
             }
@@ -77,7 +72,6 @@ public class WeatherDataConsumer {
     public static void writeDataInParquetFiles(HashMap<Integer,StringBuilder>data,SparkSession sparkSession){
         Set<Entry<Integer, StringBuilder> > entrySet = data.entrySet();
         for (Entry<Integer, StringBuilder> entry : entrySet) {
-            // print ad display the Rank and Name
             String outputPath="stationID_"+entry.getKey()+"/"+getCurrentDate()+"/"+getCurrentTIme()+".parquet";
             String jsonRecords="[\n"+entry.getValue()+"\n]";
             System.out.println(jsonRecords);
