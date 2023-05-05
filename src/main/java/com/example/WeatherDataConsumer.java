@@ -52,40 +52,33 @@ public class WeatherDataConsumer {
                 counter++;
                 System.out.println("counter === "+counter);
                 if(counter>=batchSize){
-                    writeDataInParquetFiles(deepCopy(stationsData),spark);
+                    writeDataInParquetFiles(stationsData,spark);
                     stationsData.clear();
                     counter=0;
                 }
             }
         }
     }
-    public static String getCurrentDate(){
-        Timestamp ts=new Timestamp(System.currentTimeMillis());
+    public static String getCurrentDate(long time){
+        Timestamp ts=new Timestamp(time);
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return dateFormat.format(ts);
     }
-    public static String getCurrentTIme(){
-        Timestamp ts=new Timestamp(System.currentTimeMillis());
+    public static String getCurrentTIme(long time){
+        Timestamp ts=new Timestamp(time);
         DateFormat timeFormat = new SimpleDateFormat("hh-mm-ss-SSS");
         return timeFormat.format(ts);
     }
     public static void writeDataInParquetFiles(HashMap<Integer,StringBuilder>data,SparkSession sparkSession){
         Set<Entry<Integer, StringBuilder> > entrySet = data.entrySet();
         for (Entry<Integer, StringBuilder> entry : entrySet) {
-            String outputPath="stationID_"+entry.getKey()+"/"+getCurrentDate()+"/"+getCurrentTIme()+".parquet";
+            long ts=Long.parseLong(entry.getValue().toString().split(",")[3].split(":")[1]);
+            String outputPath="stationID_"+entry.getKey()+"/"+getCurrentDate(ts)+"/"+getCurrentTIme(ts)+".parquet";
             String jsonRecords="[\n"+entry.getValue()+"\n]";
             System.out.println(jsonRecords);
             JsonToParquetWriter.writeParquet(jsonRecords,outputPath,sparkSession);
         }
         data.clear();
-    }
-    public static HashMap<Integer,StringBuilder>deepCopy(HashMap<Integer,StringBuilder>clonedHash){
-        Gson gson = new Gson();
-        String jsonString = gson.toJson(clonedHash);
-        Type type = new TypeToken<HashMap<Integer, StringBuilder>>(){}.getType();
-        HashMap<Integer, StringBuilder> deepClonedMap = gson.fromJson(jsonString, type);
-        System.out.println(clonedHash==deepClonedMap);
-        return deepClonedMap;
     }
 
 

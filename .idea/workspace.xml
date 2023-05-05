@@ -4,19 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e8e11af-2f5b-45f8-b952-5fea85ba30b3" name="Changes" comment="Update maven">
+    <list default="true" id="5e8e11af-2f5b-45f8-b952-5fea85ba30b3" name="Changes" comment="Fix bug in storing parquet files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/WeatherDataConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/WeatherDataConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Writers/JsonToParquetWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Writers/JsonToParquetWriter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/App.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/WeatherDataConsumer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/WeatherDataConsumer$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/WeatherDataConsumer$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/WeatherDataConsumer$1.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/WeatherDataConsumer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/WeatherDataConsumer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/Writers/JsonToParquetWriter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Writers/JsonToParquetWriter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/processors/RainingTrigger$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/processors/RainingTrigger$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/processors/RainingTrigger.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/processors/RainingTrigger.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/example/AppTest.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +25,19 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="db0f9d0b-4748-4474-aba9-f15abc4b273f" />
+        <option name="url" value="https://github.com/moaz886/central-station.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -136,8 +142,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.WeatherDataConsumer" />
-        <item itemvalue="Application.JsonToParquetWriter" />
         <item itemvalue="Application.App" />
+        <item itemvalue="Application.JsonToParquetWriter" />
         <item itemvalue="Application.RainingTrigger" />
       </list>
     </recent_temporary>
@@ -158,8 +164,18 @@
       <workItem from="1683008480484" duration="11480000" />
       <workItem from="1683119566758" duration="1069000" />
       <workItem from="1683120647641" duration="5792000" />
-      <workItem from="1683183795371" duration="2166000" />
+      <workItem from="1683183795371" duration="3653000" />
+      <workItem from="1683268805146" duration="1411000" />
+      <workItem from="1683270450370" duration="302000" />
     </task>
+    <task id="LOCAL-00001" summary="Fix bug in storing parquet files">
+      <created>1683186119152</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1683186119152</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -167,6 +183,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update maven" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update maven" />
+    <MESSAGE value="Fix bug in storing parquet files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix bug in storing parquet files" />
   </component>
 </project>
