@@ -1,5 +1,6 @@
 target/
-
+Weather-Status-Data/
+Elasticsearch Loader/indexedFiles.txt
 #Intellij
 out/
 .idea/
