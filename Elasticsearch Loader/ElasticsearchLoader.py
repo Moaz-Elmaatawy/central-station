@@ -9,7 +9,8 @@ from elasticsearch.helpers import bulk
 def find_text_files(directory):
     text_files = []
     for (root, dirs, files) in os.walk(directory):
-            text_files += [root+'/'+ item for item in files]
+            
+            text_files += [root+'/'+ item for item in files if item.endswith(".parquet")]
             
     return text_files
 
@@ -30,6 +31,7 @@ def loadToElasticesearch(files: list):
     es = Elasticsearch('http://localhost:9200')
 
     for file in files:
+        print("==========>",file)
         df = pd.read_parquet(file)
 
         # Convert DataFrame to list of dicts
@@ -79,7 +81,7 @@ def fileWatcher(watchDirectory: str, pollTime: int):
         time.sleep(pollTime)
 
 
-watchDirectory = "./Weather-Status-Data"
+watchDirectory = "/home/hadoop/ProjectDataIntensive/Consumer/central-station/parquet_files"
 pollTime = 50 #in seconds
 
 

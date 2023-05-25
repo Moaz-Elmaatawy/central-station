@@ -63,7 +63,7 @@ public class WeatherStatusArchiver {
         Set<Entry<Integer, StringBuilder> > entrySet = data.entrySet();
         for (Entry<Integer, StringBuilder> entry : entrySet) {
             long ts=Long.parseLong(entry.getValue().toString().split(",")[3].split(":")[1]);
-            String outputPath="stationID_"+entry.getKey()+"/"+getCurrentDate(ts)+"/"+getCurrentTIme(ts)+".parquet";
+            String outputPath="parquet_files/stationID_"+entry.getKey()+"/"+getCurrentDate(ts)+"/"+getCurrentTIme(ts);
             String jsonRecords="[\n"+entry.getValue()+"\n]";
             System.out.println(jsonRecords);
             JsonToParquetWriter.writeParquet(jsonRecords,outputPath,sparkSession);

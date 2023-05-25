@@ -1,6 +1,7 @@
 target/
 Weather-Status-Data/
 Elasticsearch Loader/indexedFiles.txt
+parquet_files/
 #Intellij
 out/
 .idea/
