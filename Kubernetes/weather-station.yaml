@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weather-station-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: weather-station
+  template:
+    metadata:
+      labels:
+        app: weather-station
+    spec:
+      containers:
+        - name: weather-station
+          image: weather-station
+          imagePullPolicy: Never
+          env:
+          - name: KAFKA_HOST
+            value: kafka-service
+          - name: KAFKA_PORT
+            value: '9092'

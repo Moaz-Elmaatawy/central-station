@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: central-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: central-station-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: central-station
+  template:
+    metadata:
+      labels:
+        app: central-station
+    spec:
+      volumes:
+        - name: central-parquet-data
+          persistentVolumeClaim:
+            claimName: central-pvc
+      containers:
+        - name: central-station
+          image: central-station
+          imagePullPolicy: Never
+          volumeMounts:
+            - name: central-parquet-data
+              mountPath: /Central-Station/parquet_files
+          env:
+            - name: ELASTIC_HOST
+              value: elastic-service:9200
+            - name: KAFKA_HOST
+              value: kafka-service:9092
+
