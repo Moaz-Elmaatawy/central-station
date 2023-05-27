@@ -1,4 +1,4 @@
-package com.example;
+package com.example.Writers;
 
 import com.example.Bitcask.BitCaskServer;
 import com.example.Bitcask.Compactor;

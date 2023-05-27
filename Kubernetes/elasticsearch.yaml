@@ -52,6 +52,7 @@ spec:
       containers:
         - name: elasticsearch-kibana
           image: nshou/elasticsearch-kibana:kibana7
+          imagePullPolicy: Never
           ports:
             - containerPort: 9200
             - containerPort: 5601

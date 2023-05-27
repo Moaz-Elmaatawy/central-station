@@ -6,6 +6,9 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.LongDeserializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
+import com.example.Writers.BitcaskWriter;
+import com.example.processors.RainingTrigger;
+
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Collections;
@@ -24,6 +27,9 @@ public class WeatherDataConsumer {
 
         BitcaskWriter writer = new BitcaskWriter();
         WeatherStatusArchiver archiver = new WeatherStatusArchiver();
+        RainingTrigger rainingTrigger =  new RainingTrigger();
+
+        rainingTrigger.start();
         
         try (KafkaConsumer<Long, String> consumer = new KafkaConsumer<>(properties)) {
             consumer.subscribe(Collections.singletonList("weather_data"));

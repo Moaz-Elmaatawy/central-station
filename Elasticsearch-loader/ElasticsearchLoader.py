@@ -28,7 +28,7 @@ def listComparison(OriginalList: list, NewList: list):
 
 def loadToElasticesearch(files: list):
     succeeded=[]
-    es = Elasticsearch(os.environ.get("ELASTIC_HOST"))
+    es = Elasticsearch("http://"+os.environ.get("ELASTIC_HOST"))
 
     for file in files:
         print("==========>",file)
@@ -63,10 +63,9 @@ def readIndexedFiles():
 def fileWatcher(watchDirectory: str, pollTime: int):
     print("Elasticsearch loader started....!")
     indexedFiles=readIndexedFiles()
-
+    time.sleep(pollTime)
+    
     while True:
-        
-        
         newFileList = find_text_files(watchDirectory)
 
         fileDiff = listComparison(indexedFiles, newFileList)

@@ -9,17 +9,16 @@ import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.KTable;
 import org.apache.kafka.streams.kstream.Produced;
 
-import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 
 
-public final class RainingTrigger {
+public final class RainingTrigger extends Thread{
 
-    public static final String INPUT_TOPIC = "weather_data";
-    public static final String OUTPUT_TOPIC = "raining_messages";
+    public final String INPUT_TOPIC = "weather_data";
+    public final String OUTPUT_TOPIC = "raining_messages";
 
-    static Properties getStreamsConfig(final String[] args) throws IOException {
+    Properties getStreamsConfig() {
         final Properties props = new Properties();
 
         props.putIfAbsent(StreamsConfig.APPLICATION_ID_CONFIG, "streams-triggers");
@@ -31,14 +30,14 @@ public final class RainingTrigger {
         return props;
     }
 
-    static void createWordCountStream(final StreamsBuilder builder) {
+    void createWordCountStream(final StreamsBuilder builder) {
         final KStream<String, String> source = builder.stream(INPUT_TOPIC);
 
 
         final KTable<String, String> rainingMessages = source
         .filter((key, value) -> {
             int humidity = Integer.parseInt(value.split(":")[6].split(",")[0]);
-            return humidity > 50;
+            return humidity > 70;
         })
         .groupBy((v1, v2) -> v2)
         .reduce((v1, v2) -> v2);
@@ -46,8 +45,9 @@ public final class RainingTrigger {
         rainingMessages.toStream().to(OUTPUT_TOPIC, Produced.with(Serdes.String(), Serdes.String()));
     }
 
-    public static void main(final String[] args) throws IOException {
-        final Properties props = getStreamsConfig(args);
+    @Override
+    public void run(){
+        Properties props = getStreamsConfig();
 
         final StreamsBuilder builder = new StreamsBuilder();
         createWordCountStream(builder);
