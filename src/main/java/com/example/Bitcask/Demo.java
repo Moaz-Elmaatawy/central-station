@@ -22,6 +22,5 @@ public class Demo {
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
         Compactor comp = new Compactor();
         scheduler.scheduleAtFixedRate(comp, start_delay, wait_delay, TimeUnit.SECONDS);
-
     }
 }
