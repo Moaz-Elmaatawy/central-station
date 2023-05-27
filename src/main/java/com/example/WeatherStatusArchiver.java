@@ -11,13 +11,14 @@ import java.util.Map.Entry;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
 public class WeatherStatusArchiver {
-    private final int BATCH_SIZE=10000;
+    private final int BATCH_SIZE=60;
     int counter=0;
-    HashMap<Integer,StringBuilder>stationData;
+    HashMap<Long,ArrayList<String>>stationData;
     SparkSession spark;
 
     public WeatherStatusArchiver(){
@@ -28,17 +29,16 @@ public class WeatherStatusArchiver {
                 .getOrCreate();
     }
 
-    public void archiveRecord(ConsumerRecords<String, String> records){
+    public void archiveRecord(ConsumerRecords<Long, String> records){
 
-        for (ConsumerRecord<String, String> record : records) {
+        for (ConsumerRecord<Long, String> record : records) {
             System.out.println("Received message: " + record.value());
-            int stationID=Integer.parseInt(record.value().split(",")[0].split(":")[1]);
+            Long stationID=record.key();
             System.out.println("Station ID is ==== "+stationID);
-            if(stationData.containsKey(stationID)){
-                stationData.put(stationID, stationData.get(stationID).append(",\n").append(record.value()));
-            }else {
-                stationData.put(stationID,new StringBuilder(record.value()));
+            if(!stationData.containsKey(stationID)){
+                stationData.put(stationID,new ArrayList<String>());
             }
+            stationData.get(stationID).add(record.value());
             counter++;
             System.out.println("counter === "+counter);
             if(counter >= BATCH_SIZE){
@@ -56,17 +56,15 @@ public class WeatherStatusArchiver {
     }
     public String getCurrentTIme(long time){
         Timestamp ts=new Timestamp(time);
-        DateFormat timeFormat = new SimpleDateFormat("hh-mm-ss-SSS");
+        DateFormat timeFormat = new SimpleDateFormat("hh-mm-ss");
         return timeFormat.format(ts);
     }
-    public void writeDataInParquetFiles(HashMap<Integer,StringBuilder>data,SparkSession sparkSession){
-        Set<Entry<Integer, StringBuilder> > entrySet = data.entrySet();
-        for (Entry<Integer, StringBuilder> entry : entrySet) {
-            long ts=Long.parseLong(entry.getValue().toString().split(",")[3].split(":")[1]);
+    public void writeDataInParquetFiles(HashMap<Long,ArrayList<String>>data,SparkSession sparkSession){
+        Set<Entry<Long, ArrayList<String>>> entrySet = data.entrySet();
+        for (Entry<Long, ArrayList<String>> entry : entrySet) {
+            long ts=Long.parseLong(entry.getValue().get(0).toString().split(",")[3].split(":")[1]);
             String outputPath="parquet_files/stationID_"+entry.getKey()+"/"+getCurrentDate(ts)+"/"+getCurrentTIme(ts);
-            String jsonRecords="[\n"+entry.getValue()+"\n]";
-            System.out.println(jsonRecords);
-            JsonToParquetWriter.writeParquet(jsonRecords,outputPath,sparkSession);
+            JsonToParquetWriter.writeParquet(entry.getValue(),outputPath,sparkSession);
         }
         data.clear();
     }

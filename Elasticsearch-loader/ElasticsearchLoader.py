@@ -28,7 +28,7 @@ def listComparison(OriginalList: list, NewList: list):
 
 def loadToElasticesearch(files: list):
     succeeded=[]
-    es = Elasticsearch('http://localhost:9200')
+    es = Elasticsearch(os.environ.get("ELASTIC_HOST"))
 
     for file in files:
         print("==========>",file)
@@ -48,19 +48,20 @@ def loadToElasticesearch(files: list):
     return files
 
 def appendIndexedFiles(indexedFiles: list):
-    with open("Elasticsearch Loader/indexedFiles.txt", "a") as f:
+    with open("Elasticsearch-loader/indexedFiles.txt", "a") as f:
         for filename in indexedFiles:
             f.write(filename + '\n')
 
 def readIndexedFiles():
     indexedFiles=[] 
-    with open("Elasticsearch Loader/indexedFiles.txt", "r") as f:
+    with open("Elasticsearch-loader/indexedFiles.txt", "r") as f:
         indexedFiles = f.read().split("\n")
 
     return indexedFiles
 
 
 def fileWatcher(watchDirectory: str, pollTime: int):
+    print("Elasticsearch loader started....!")
     indexedFiles=readIndexedFiles()
 
     while True:
@@ -81,7 +82,7 @@ def fileWatcher(watchDirectory: str, pollTime: int):
         time.sleep(pollTime)
 
 
-watchDirectory = "/home/hadoop/ProjectDataIntensive/Consumer/central-station/parquet_files"
+watchDirectory = "./parquet_files"
 pollTime = 50 #in seconds
 
 
